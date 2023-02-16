@@ -1,0 +1,10 @@
+C:\Users\suqiy\Downloads\WebAPIClient\bin\Debug\WebAPIClient.exe.config
+C:\Users\suqiy\Downloads\WebAPIClient\bin\Debug\WebAPIClient.exe
+C:\Users\suqiy\Downloads\WebAPIClient\bin\Debug\WebAPIClient.pdb
+C:\Users\suqiy\Downloads\WebAPIClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\suqiy\Downloads\WebAPIClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\suqiy\Downloads\WebAPIClient\obj\Debug\WebAPIClient.csproj.AssemblyReference.cache
+C:\Users\suqiy\Downloads\WebAPIClient\obj\Debug\WebAPIClient.csproj.CoreCompileInputs.cache
+C:\Users\suqiy\Downloads\WebAPIClient\obj\Debug\WebAPIClient.csproj.CopyComplete
+C:\Users\suqiy\Downloads\WebAPIClient\obj\Debug\WebAPIClient.exe
+C:\Users\suqiy\Downloads\WebAPIClient\obj\Debug\WebAPIClient.pdb
