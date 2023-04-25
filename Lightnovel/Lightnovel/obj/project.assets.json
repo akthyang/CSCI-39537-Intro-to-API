@@ -10628,11 +10628,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\akthy\\Downloads\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
+      "projectUniqueName": "C:\\Users\\akthy\\Downloads\\CSCI-39537-Intro-to-API\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
       "projectName": "Lightnovel",
-      "projectPath": "C:\\Users\\akthy\\Downloads\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
+      "projectPath": "C:\\Users\\akthy\\Downloads\\CSCI-39537-Intro-to-API\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
       "packagesPath": "C:\\Users\\akthy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\akthy\\Downloads\\Lightnovel\\Lightnovel\\obj\\",
+      "outputPath": "C:\\Users\\akthy\\Downloads\\CSCI-39537-Intro-to-API\\Lightnovel\\Lightnovel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\akthy\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -17,6 +17,19 @@ body {
   margin-bottom: 60px;
 }
 
+.nav-item a {
+  text-decoration: none;
+  color: black;
+  height: 100%;
+  margin: 0px 10px;
+  padding: 10px;
+}
+
+.nav-item a:hover, #button:hover {
+  color: white;
+  background-color: black;
+}
+
 #welcome {
   height: 60vh;
   display: flex;
@@ -39,27 +52,39 @@ body {
   cursor: pointer;
 }
 
-#button:hover {
-  background-color: black;
-  color: white;
-}
-
 #welcome p {
    margin-top: 40px;
 }
 
-#welcome p a, table #title a, table #raw a {
-  font-weight: bold;
+#welcome p a, table #title a, table #raw a, table #comic a {
   text-decoration: none;
   color: none;
   cursor: pointer;
   color: black;
+  font-weight: bold;
 }
 
-#welcome p a:hover, table #title a:hover, table #raw a:hover {
+#welcome p a:hover, table #title a:hover, 
+table #raw a:hover, table #comic a:hover {
   color: cornflowerblue;
 }
 
 #note {
   margin-top: 30px;
+}
+
+.row .col-md-4 form .form-group {
+  margin: 10px 0px;
+}
+
+.row .col-md-4 form .form-group label {
+  margin: 5px 0px;
+}
+
+.backbutton {
+  margin-bottom: 10px;
+}
+
+.backbutton a, #submitbutton input {
+  width: 120px;
 }

@@ -2,11 +2,15 @@
 
 @{
     ViewData["Title"] = "Edit";
+    
 }
 
-<h1>Edit</h1>
+<h1>Edit Novel</h1>
 
-<h4>Novel</h4>
+<h4>
+    @Html.DisplayFor(Model => Model.Title)
+</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,12 +23,12 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OriginalLanguage" class="control-label"></label>
+                <label asp-for="OriginalLanguage" class="control-label">Original Language</label>
                 <input asp-for="OriginalLanguage" class="form-control" />
                 <span asp-validation-for="OriginalLanguage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Blurb" class="control-label"></label>
+                <label asp-for="Blurb" class="control-label">Description</label>
                 <input asp-for="Blurb" class="form-control" />
                 <span asp-validation-for="Blurb" class="text-danger"></span>
             </div>
@@ -39,7 +43,7 @@
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookStatus" class="control-label"></label>
+                <label asp-for="BookStatus" class="control-label">Book Status</label>
                 <input asp-for="BookStatus" class="form-control" />
                 <span asp-validation-for="BookStatus" class="text-danger"></span>
             </div>
@@ -63,15 +67,18 @@
                 <select asp-for="RawId" class="form-control" asp-items="ViewBag.RawId"></select>
                 <span asp-validation-for="RawId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group" id="submitbutton">
+                <input type="submit" value="Save My Edits" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="backbutton">
+    <a asp-action="Details" asp-route-id="@Model?.NovelId" class="btn btn-primary">View Novel</a><br>
+</div>
+<div class="backbutton">
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {

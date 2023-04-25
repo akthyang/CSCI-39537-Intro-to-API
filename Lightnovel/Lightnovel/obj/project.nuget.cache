@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4UqcojcetdDiBu3xYFL6FYqAORQB7V5a0LeP4dUsQejcIRdJh8npZMK7w9++0iVVGw9oMP2ZEpMnFaU/dIhcNw==",
+  "dgSpecHash": "T19kTVrWfMSEeB+xcaEVYK5gMOyWEfvDz2LdcjeMaChhAZgY5gWO9NJNY9xioEjhluzP6AFPDfGuOAuYX7+xsw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\akthy\\Downloads\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
+  "projectFilePath": "C:\\Users\\akthy\\Downloads\\CSCI-39537-Intro-to-API\\Lightnovel\\Lightnovel\\Lightnovel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\akthy\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\akthy\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

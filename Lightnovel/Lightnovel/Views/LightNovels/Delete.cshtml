@@ -4,11 +4,12 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Delete Novel</h1>
 
 <h3>Are you sure you want to delete this?</h3>
+
 <div>
-    <h4>Novel</h4>
+    <h4>@Html.DisplayFor(Model => Model.Title)</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -18,13 +19,13 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OriginalLanguage)
+            Original Language
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.OriginalLanguage)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Blurb)
+            Description
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Blurb)
@@ -42,7 +43,7 @@
             @Html.DisplayFor(model => model.Genre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BookStatus)
+            Book Status
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BookStatus)
@@ -75,7 +76,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="NovelId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a asp-action="Edit" asp-route-id="@Model?.NovelId" class="btn btn-primary">Edit</a>
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
     </form>
 </div>

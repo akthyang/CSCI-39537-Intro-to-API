@@ -11,7 +11,9 @@
 </p>
 
 <h6 id="note">
-    All words in bold in the table are clickable.
+    Please note: Some words are clickable on this page. Please hover over
+    the words to see if they can be clicked or not. The entire information for 
+    each novel can be seen by clicking on "Details".
 </h6>
 
 <table class="table">
@@ -67,10 +69,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Creator.FullName)
             </td>
-            <td>
-                    <a target="_blank" href="@Html.DisplayFor(modelItem => item.Comic.Link)">
-                        Read Here...
-                    <a/>
+            <td id="comic">
+                <a target="_blank" href="@Html.DisplayFor(modelItem => item.Comic.Link)">
+                    Read
+                <a/>
             </td>
             <td id="raw">
                 <a target="_blank" href="@Html.DisplayFor(modelItem => item.Raw.Link)">
@@ -78,8 +80,8 @@
                 <a/>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.NovelId">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.NovelId">Details</a> 
+                <a asp-action="Edit" asp-route-id="@item.NovelId">Edit</a><br> 
+                <a asp-action="Details" asp-route-id="@item.NovelId">Details</a><br>
                 <a asp-action="Delete" asp-route-id="@item.NovelId">Delete</a>
             </td>
         </tr>
