@@ -1,0 +1,88 @@
+﻿@model IEnumerable<LightNovel.Models.Novel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Lightnovels</h1>
+
+<p>
+    <a asp-action="Create" id="button">Create New Novel</a>
+</p>
+
+<h6 id="note">
+    All words in bold in the table are clickable.
+</h6>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                Original Language
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                Book Status
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Raw)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td id="title">
+                <a target="_blank" href="@Html.DisplayFor(modelItem => item.Link)">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OriginalLanguage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator.FullName)
+            </td>
+            <td>
+                    <a target="_blank" href="@Html.DisplayFor(modelItem => item.Comic.Link)">
+                        Read Here...
+                    <a/>
+            </td>
+            <td id="raw">
+                <a target="_blank" href="@Html.DisplayFor(modelItem => item.Raw.Link)">
+                    @Html.DisplayFor(modelItem => item.Raw.Title)
+                <a/>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NovelId">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.NovelId">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.NovelId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,65 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#welcome {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#welcome h1, h1 {
+  margin-bottom: 40px;
+}
+
+#button {
+  border: 1px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  padding: 15px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#button:hover {
+  background-color: black;
+  color: white;
+}
+
+#welcome p {
+   margin-top: 40px;
+}
+
+#welcome p a, table #title a, table #raw a {
+  font-weight: bold;
+  text-decoration: none;
+  color: none;
+  cursor: pointer;
+  color: black;
+}
+
+#welcome p a:hover, table #title a:hover, table #raw a:hover {
+  color: cornflowerblue;
+}
+
+#note {
+  margin-top: 30px;
+}
