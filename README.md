@@ -63,13 +63,13 @@ Please note all csv files were directly exported from mySQL workbench and the N/
 did not exist for the novel or this information was not known.
 
 #### Comic
-![Image of the Database for Comics](ComicData.png)
+![Image of the Database for Comics](ComicDatas.png)
 
 #### Creator
-![Image of the Database for Creators](CreatorData.png)
+![Image of the Database for Creators](CreatorDatas.png)
 
 #### Raw
-![Image of the Database for Raw](RawData.png)
+![Image of the Database for Raw](RawDatas.png)
 
 #### Sample of Novel Data
 ![Image of a part of the Database for Novel](NovelData.png)
