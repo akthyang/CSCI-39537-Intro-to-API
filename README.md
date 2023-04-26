@@ -23,7 +23,6 @@ CREATE TABLE Novels (
     Blurb VARCHAR(4000) NOT NULL,
     Rating DECIMAL(4, 2) NULL,
     Genre VARCHAR(1000) NOT NULL,
-    TranslatedStatus ENUM('ongoing', 'completed', 'hiatus'),
     Link VARCHAR(1000) NULL,
     PRIMARY KEY (NovelId)
 ); 
@@ -56,6 +55,7 @@ ALTER TABLE Novels ADD COLUMN RawId INT;
 ALTER TABLE Novels ADD CONSTRAINT FK_NovelRaw FOREIGN KEY (RawId) References Raw(RawId);
 ALTER TABLE Novels ADD COLUMN CreatorId INT;
 ALTER TABLE Novels ADD CONSTRAINT FK_NovelCreator FOREIGN KEY (CreatorId) References Creators(CreatorId);
+ALTER TABLE Novels ADD COLUMN TranslatedStatus VARCHAR(500);
 ```
 
 ### Information added to the Database - more information can be found in the csv files uploaded for each database
