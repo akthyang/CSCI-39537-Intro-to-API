@@ -58,6 +58,10 @@ body {
    margin-top: 40px;
 }
 
+#welcome p a {
+   font-weight: bold;
+}
+
 #welcome p a, table #title a, table #raw a, table #comic a {
   text-decoration: none;
   color: none;
