@@ -1,83 +1,107 @@
-﻿@model LightNovel.Models.Novel
+﻿@model Lightnovel.Models.Response
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Novel";
 }
 
-<h1>Delete Novel</h1>
+<h1 class="titleofpage">Delete Novel</h1>
+
+<div class="statusCode">
+    @if (Model.statusCode == 200)
+    {
+        <p id="okay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
+    else
+    {
+        <p id="notokay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
+</div>
+<div class="statusDescript">
+    <p>
+        @Html.DisplayFor(model => model.statusDescription)
+    </p>
+</div>
 
 <h3>Are you sure you want to delete this?</h3>
 
-<div>
-    <h4>@Html.DisplayFor(Model => Model.Title)</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            Original Language
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OriginalLanguage)
-        </dd>
-        <dt class = "col-sm-2">
-            Description
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Blurb)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-        <dt class = "col-sm-2">
-            Book Status
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BookStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Creator)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Creator.CreatorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Comic)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Comic.ComicId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Raw)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Raw.RawId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="NovelId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a asp-action="Edit" asp-route-id="@Model?.NovelId" class="btn btn-primary">Edit</a>
-        <a asp-action="Index" class="btn btn-primary">Back to List</a>
-    </form>
-</div>
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
+
+@foreach(var element in Model.novels)
+{
+    <div>
+        <h4>@Html.DisplayFor(model => element.Title)</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Title)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Title)
+            </dd>
+            <dt class = "col-sm-2">
+                Original Language
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.OriginalLanguage)
+            </dd>
+            <dt class = "col-sm-2">
+                Description
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Blurb)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Rating)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Rating)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Genre)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Genre)
+            </dd>
+            <dt class = "col-sm-2">
+                Book Status
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.TranslatedStatus)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Link)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Link)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Creator)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Creator.CreatorId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Comic)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Comic.ComicId)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => element.Raw)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => element.Raw.RawId)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="@element.NovelId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            <a asp-action="Edit" asp-route-id="@element.NovelId" class="btn btn-primary">Edit</a>
+        </form>
+    </div>
+}

@@ -4,12 +4,21 @@
     ViewData["Title"] = "All Novels";
 }
 
-<h1 id="allnovels">All Lightnovels</h1>
+<h1 class="titleofpage">All Lightnovels</h1>
 
 <div class="statusCode">
-    <p>
-        Status: @Html.DisplayFor(model => model.statusCode)
-    </p>
+    @if (Model.statusCode == 200)
+    {
+        <p id="okay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
+    else
+    {
+        <p id="notokay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
 </div>
 <div class="statusDescript">
     <p>
@@ -74,7 +83,7 @@
                 @Html.DisplayFor(modelItem => element.Genre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => element.BookStatus)
+                @Html.DisplayFor(modelItem => element.TranslatedStatus)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => element.Creator.FullName)

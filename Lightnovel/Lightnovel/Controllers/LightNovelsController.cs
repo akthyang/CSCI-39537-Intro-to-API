@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LightNovel.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Lightnovel.Controllers
 {
@@ -35,12 +36,11 @@ namespace Lightnovel.Controllers
             var response = new Models.Response();
             // set as successful
             response.statusCode = 200;
-            response.statusDescription = $"Novels {id}";
             response.statusDescription = "Success. Below is the novel for id " + id;
             if (id == null || _context.Novels == null)
             {
                 response.statusCode = 400;
-                response.statusDescription = "Novel Id must be an integar.";
+                response.statusDescription = "Failed: Id is invalid or the database is empty";
             }
 
             var novel = await _context.Novels
@@ -51,7 +51,7 @@ namespace Lightnovel.Controllers
             if (novel == null)
             {
                 response.statusCode = 400;
-                response.statusDescription = "The novel at the id you selected does not exist.";
+                response.statusDescription = "Failed: The novel at id " + id + " does not exist.";
             }
 
             response.novels.Add(novel);
@@ -62,10 +62,16 @@ namespace Lightnovel.Controllers
         // GET: LightNovels/Create
         public IActionResult Create()
         {
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "ComicId");
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "CreatorId");
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "RawId");
-            return View();
+            var response = new Models.Response();
+            response.statusCode = 200;
+            response.statusDescription = "Success: You are currently adding a new novel to the database.";
+
+            var newNovel = new Novel();
+            response.novels.Add(newNovel);
+            ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title");
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "FullName");
+            ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title");
+            return View(response);
         }
 
         // POST: LightNovels/Create
@@ -73,37 +79,50 @@ namespace Lightnovel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NovelId,Title,OriginalLanguage,Blurb,Rating,Genre,BookStatus,Link,CreatorId,ComicId,RawId")] Novel novel)
+        public async Task<ActionResult<Models.Response>> Create(Models.Response response)
         {
-            if (ModelState.IsValid)
+            Novel novel = response.novels[0];
+            response.statusCode = 400;
+            response.statusDescription = "Opps. We weren't able to create this novel. Please try again.";
+            if (novel != null)
             {
                 _context.Add(novel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                response.statusCode = 200;
+                response.statusDescription = "We have successfully created your novel";
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "ComicId", novel.ComicId);
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "CreatorId", novel.CreatorId);
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "RawId", novel.RawId);
-            return View(novel);
+
+            ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
+            ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
+
+            return View(response);
         }
 
         // GET: LightNovels/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<ActionResult<Models.Response>> Edit(int? id)
         {
+            var response = new Models.Response();
+            response.statusCode = 200;
+            response.statusDescription = "You are currently editing novel at id " + id;
             if (id == null || _context.Novels == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "Failed: Id is empty or database is empty.";
             }
 
             var novel = await _context.Novels.FindAsync(id);
+            response.novels.Add(novel);
+
             if (novel == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "Failed: Novel at id " + id + "does not exist.";
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "ComicId", novel.ComicId);
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "CreatorId", novel.CreatorId);
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "RawId", novel.RawId);
-            return View(novel);
+            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
+            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
+            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
+            return View(response);
         }
 
         // POST: LightNovels/Edit/5
@@ -111,14 +130,12 @@ namespace Lightnovel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NovelId,Title,OriginalLanguage,Blurb,Rating,Genre,BookStatus,Link,CreatorId,ComicId,RawId")] Novel novel)
+        public async Task<ActionResult<Models.Response>> Edit(Models.Response response)
         {
-            if (id != novel.NovelId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
+            response.statusCode = 200;
+            Novel novel = response.novels[0];
+            response.statusDescription = "Your novel was successfully added";
+            if (novel != null)
             {
                 try
                 {
@@ -129,7 +146,8 @@ namespace Lightnovel.Controllers
                 {
                     if (!NovelExists(novel.NovelId))
                     {
-                        return NotFound();
+                        response.statusCode = 400;
+                        response.statusDescription = "Failed: The novel you are trying to edit does not exist.";
                     }
                     else
                     {
@@ -138,18 +156,22 @@ namespace Lightnovel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "ComicId", novel.ComicId);
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "CreatorId", novel.CreatorId);
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "RawId", novel.RawId);
-            return View(novel);
+            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
+            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
+            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
+            return View(response);
         }
 
         // GET: LightNovels/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<ActionResult<Models.Response>> Delete(int? id)
         {
+            var response = new Models.Response();
+            response.statusCode = 200;
+            response.statusDescription = "Success: You are currently deleting the novel at id " + id;
             if (id == null || _context.Novels == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "Failed: Id is empty or the database is empty.";
             }
 
             var novel = await _context.Novels
@@ -157,22 +179,31 @@ namespace Lightnovel.Controllers
                 .Include(n => n.Creator)
                 .Include(n => n.Raw)
                 .FirstOrDefaultAsync(m => m.NovelId == id);
+
+            response.novels.Add(novel);
+
             if (novel == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "Failed: The novel at id " + id + "does not exist";
             }
 
-            return View(novel);
+            return View(response);
         }
 
         // POST: LightNovels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult<Models.Response>> DeleteConfirmed(int id)
         {
+            var response = new Models.Response();
+            response.statusCode = 200;
+            response.statusDescription = "Success: You have deleted the novel at id " + id;
+
             if (_context.Novels == null)
             {
-                return Problem("Entity set 'LightNovelDBContext.Novels'  is null.");
+                response.statusCode = 400;
+                response.statusDescription = "Failed: Entity set 'LightNovelDBContext.Novels'  is null.";
             }
             var novel = await _context.Novels.FindAsync(id);
             if (novel != null)
@@ -181,7 +212,7 @@ namespace Lightnovel.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(response);
         }
 
         private bool NovelExists(int id)

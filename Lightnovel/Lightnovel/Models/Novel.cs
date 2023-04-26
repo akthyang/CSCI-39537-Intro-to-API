@@ -11,7 +11,7 @@ namespace LightNovel.Models
         public string Blurb { get; set; } = string.Empty;
         public decimal Rating { get; set; }
         public string Genre { get; set; } = string.Empty;
-        public string BookStatus { get; set; } = string.Empty;
+        public string TranslatedStatus { get; set; } = string.Empty;
         public string Link { get; set; } = string.Empty;
         public int? CreatorId { get; set; }
         public Creator? Creator { get; set; }

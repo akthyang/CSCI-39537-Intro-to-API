@@ -1,73 +1,95 @@
-﻿@model LightNovel.Models.Novel
+﻿@model Lightnovel.Models.Response
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Novel";
 }
 
 <h1>Create</h1>
 
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
+
+<div class="statusCode">
+    @if (Model.statusCode == 200)
+    {
+        <p id = "okay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
+    else
+    {
+        <p id="notokay">
+            Status: @Html.DisplayFor(model => model.statusCode)
+        </p>
+    }
+</div>
+<div class="statusDescript">
+    <p>
+        @Html.DisplayFor(model => model.statusDescription)
+    </p>
+</div>
+
 <h4>Novel</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="novels[0].Title" class="control-label"></label>
+                <input asp-for="novels[0].Title" class="form-control" />
+                <span asp-validation-for="novels[0].Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OriginalLanguage" class="control-label">Original Language</label>
-                <input asp-for="OriginalLanguage" class="form-control" />
-                <span asp-validation-for="OriginalLanguage" class="text-danger"></span>
+                <label asp-for="novels[0].OriginalLanguage" class="control-label">Original Language</label>
+                <input asp-for="novels[0].OriginalLanguage" class="form-control" />
+                <span asp-validation-for="novels[0].OriginalLanguage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Blurb" class="control-label">Description</label>
-                <input asp-for="Blurb" class="form-control" />
-                <span asp-validation-for="Blurb" class="text-danger"></span>
+                <label asp-for="novels[0].Blurb" class="control-label">Description</label>
+                <input asp-for="novels[0].Blurb" class="form-control" />
+                <span asp-validation-for="novels[0].Blurb" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
+                <label asp-for="novels[0].Rating" class="control-label"></label>
+                <input asp-for="novels[0].Rating" class="form-control" />
+                <span asp-validation-for="novels[0].Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control" />
-                <span asp-validation-for="Genre" class="text-danger"></span>
+                <label asp-for="novels[0].Genre" class="control-label"></label>
+                <input asp-for="novels[0].Genre" class="form-control" />
+                <span asp-validation-for="novels[0].Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookStatus" class="control-label">Book Status</label>
-                <input asp-for="BookStatus" class="form-control" />
-                <span asp-validation-for="BookStatus" class="text-danger"></span>
+                <label asp-for="novels[0].TranslatedStatus" class="control-label">Translated Status</label>
+                <input asp-for="novels[0].TranslatedStatus" class="form-control" />
+                <span asp-validation-for="novels[0].TranslatedStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Link" class="control-label"></label>
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
+                <label asp-for="novels[0].Link" class="control-label"></label>
+                <input asp-for="novels[0].Link" class="form-control" />
+                <span asp-validation-for="novels[0].Link" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatorId" class="control-label"></label>
-                <select asp-for="CreatorId" class ="form-control" asp-items="ViewBag.CreatorId"></select>
+                <label asp-for="novels[0].CreatorId" class="control-label"></label>
+                <select asp-for="novels[0].CreatorId" class="form-control" asp-items="ViewBag.Creator"></select>
+                <span asp-validation-for="novels[0].CreatorId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ComicId" class="control-label"></label>
-                <select asp-for="ComicId" class ="form-control" asp-items="ViewBag.ComicId"></select>
+                <label asp-for="novels[0].Comic" class="control-label"></label>
+                <select asp-for="novels[0].ComicId" class="form-control" asp-items="ViewBag.Comic"></select>
+                <span asp-validation-for="novels[0].ComicId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RawId" class="control-label"></label>
-                <select asp-for="RawId" class ="form-control" asp-items="ViewBag.RawId"></select>
+                <label asp-for="novels[0].RawId" class="control-label"></label>
+                <select asp-for="novels[0].RawId" class="form-control" asp-items="ViewBag.Raw"></select>
+                <span asp-validation-for="novels[0].RawId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
