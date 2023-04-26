@@ -113,7 +113,7 @@ did not exist for the novel or this information was not known.
 ![Image of HomePage of API](HomePage.jpg)
 
 ### BookAPI - GET method for all novels
-![Image of Novel Database](BookAPI.jpg)
+![Image of Novel Database](BookApi.jpg)
 
 ### GET method of one novel
 ![Image of GET method for one novel](Details.jpg)
