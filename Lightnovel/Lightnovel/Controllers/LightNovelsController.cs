@@ -69,7 +69,7 @@ namespace Lightnovel.Controllers
             var newNovel = new Novel();
             response.novels.Add(newNovel);
             ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title");
-            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "FullName");
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "EnglishName");
             ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title");
             return View(response);
         }
@@ -93,7 +93,7 @@ namespace Lightnovel.Controllers
             }
 
             ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
-            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "EnglishName", novel.CreatorId);
             ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
 
             return View(response);
@@ -119,9 +119,9 @@ namespace Lightnovel.Controllers
                 response.statusCode = 400;
                 response.statusDescription = "Failed: Novel at id " + id + "does not exist.";
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
+            ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "EnglishName", novel.CreatorId);
+            ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
             return View(response);
         }
 
@@ -134,7 +134,7 @@ namespace Lightnovel.Controllers
         {
             response.statusCode = 200;
             Novel novel = response.novels[0];
-            response.statusDescription = "Your novel was successfully added";
+            response.statusDescription = "Your novel was successfully updated.";
             if (novel != null)
             {
                 try
@@ -154,11 +154,10 @@ namespace Lightnovel.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
-            ViewData["CreatorId"] = new SelectList(_context.Creators, "CreatorId", "FullName", novel.CreatorId);
-            ViewData["RawId"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
+            ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
+            ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "EnglishName", novel.CreatorId);
+            ViewData["Raw"] = new SelectList(_context.Raws, "RawId", "Title", novel.RawId);
             return View(response);
         }
 

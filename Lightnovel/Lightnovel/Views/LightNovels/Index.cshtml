@@ -86,17 +86,26 @@
                 @Html.DisplayFor(modelItem => element.TranslatedStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => element.Creator.FullName)
+                @Html.DisplayFor(modelItem => element.Creator.EnglishName)
             </td>
             <td id="comic">
-                <a target="_blank" href="@Html.DisplayFor(modelItem => element.Comic.Link)">
-                    Read
-                <a/>
-            </td>
+                    @if (element.Comic.Title == "N/A")
+                    {
+                        <p>
+                            There is currently no comic for this novel.
+                        </p>
+                    }
+                    else
+                    {
+                        <a target="_blank" href="@Html.DisplayFor(modelItem => element.Comic.Link)">
+                            Read
+                        </a>
+                    }
+                </td>
             <td id="raw">
                 <a target="_blank" href="@Html.DisplayFor(modelItem => element.Raw.Link)">
                     @Html.DisplayFor(modelItem => element.Raw.Title)
-                <a/>
+                </a>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@element.NovelId">Edit</a><br> 

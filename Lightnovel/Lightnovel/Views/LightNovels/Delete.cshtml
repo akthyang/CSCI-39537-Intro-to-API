@@ -6,6 +6,8 @@
 
 <h1 class="titleofpage">Delete Novel</h1>
 
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
+
 <div class="statusCode">
     @if (Model.statusCode == 200)
     {
@@ -27,8 +29,6 @@
 </div>
 
 <h3>Are you sure you want to delete this?</h3>
-
-<a asp-action="Index" class="btn btn-primary">Back to List</a>
 
 @foreach(var element in Model.novels)
 {
@@ -82,19 +82,19 @@
                 @Html.DisplayNameFor(model => element.Creator)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => element.Creator.CreatorId)
+                @Html.DisplayFor(model => element.Creator.EnglishName)
             </dd>
             <dt class = "col-sm-2">
                 @Html.DisplayNameFor(model => element.Comic)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => element.Comic.ComicId)
+                @Html.DisplayFor(model => element.Comic.Title)
             </dd>
             <dt class = "col-sm-2">
                 @Html.DisplayNameFor(model => element.Raw)
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => element.Raw.RawId)
+                @Html.DisplayFor(model => element.Raw.Title)
             </dd>
         </dl>
 

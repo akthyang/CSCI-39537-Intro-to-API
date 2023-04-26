@@ -84,7 +84,8 @@
                     Author
                 </dt>
                 <dd class="col-sm-8">
-                    @Html.DisplayFor(model => element.Creator.FullName)
+                    @Html.DisplayFor(model => element.Creator.EnglishName) 
+                    (@Html.DisplayFor(model => element.Creator.FullName) )
                 </dd>
                 <dt class = "col-sm-4">
                     @Html.DisplayNameFor(model => element.Comic.ComicId)
@@ -97,16 +98,19 @@
                 </dt>
                 <dd class="col-sm-8">
                     <p>
-                        @if (element.Comic.Link == null)
+                        @if (element.Comic.Link == "N/A")
                         {
                             <span>
                                 There is currently no comic link for this novel;
-                            </span>
-                        }
+                        </span>
+                    }
+                    else
+                    {
                         <a href="@Html.DisplayFor(modelItem => element.Comic.Link)">
                             Read
                         </a>
-                    </p>
+                    }
+                </p>
                 </dd>
                 <dt class = "col-sm-4">
                     @Html.DisplayNameFor(model => element.Raw.RawId)
