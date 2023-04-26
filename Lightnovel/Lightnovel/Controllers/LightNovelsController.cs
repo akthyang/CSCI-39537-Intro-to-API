@@ -19,18 +19,28 @@ namespace Lightnovel.Controllers
         }
 
         // GET: LightNovels
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult<Models.Response>> Index()
         {
             var lightNovelDBContext = _context.Novels.Include(n => n.Comic).Include(n => n.Creator).Include(n => n.Raw);
-            return View(await lightNovelDBContext.OrderBy(b => b.Title).ToListAsync());
+            var response = new Models.Response();
+            response.statusCode = 200;
+            response.statusDescription = "Success. All novels displayed.";
+            response.novels = await lightNovelDBContext.OrderBy(b => b.Title).ToListAsync();
+            return View(response);
         }
 
         // GET: LightNovels/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<ActionResult<Models.Response>> Details(int? id)
         {
+            var response = new Models.Response();
+            // set as successful
+            response.statusCode = 200;
+            response.statusDescription = $"Novels {id}";
+            response.statusDescription = "Success. Below is the novel for id " + id;
             if (id == null || _context.Novels == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "Novel Id must be an integar.";
             }
 
             var novel = await _context.Novels
@@ -40,10 +50,13 @@ namespace Lightnovel.Controllers
                 .FirstOrDefaultAsync(m => m.NovelId == id);
             if (novel == null)
             {
-                return NotFound();
+                response.statusCode = 400;
+                response.statusDescription = "The novel at the id you selected does not exist.";
             }
 
-            return View(novel);
+            response.novels.Add(novel);
+
+            return View(response);
         }
 
         // GET: LightNovels/Create
