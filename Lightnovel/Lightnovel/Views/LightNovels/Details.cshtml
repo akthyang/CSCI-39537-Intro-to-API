@@ -6,6 +6,8 @@
 
 <h1 class="titleofpage">Details</h1>
 
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
+
 <div class="statusCode">
     @if (Model.statusCode == 200)
     {
@@ -98,19 +100,25 @@
                 </dt>
                 <dd class="col-sm-8">
                     <p>
-                        @if (element.Comic.Link == "N/A")
+                        @if (element.Comic == null)
+                        {
+                            <span>
+                                There is currently no comic for this novel;
+                            </span>
+                        }
+                        else if (element.Comic.Link == "N/A") 
                         {
                             <span>
                                 There is currently no comic link for this novel;
-                        </span>
-                    }
-                    else
-                    {
-                        <a href="@Html.DisplayFor(modelItem => element.Comic.Link)">
-                            Read
-                        </a>
-                    }
-                </p>
+                            </span>
+                        }
+                        else
+                        {
+                            <a href="@Html.DisplayFor(modelItem => element.Comic.Link)">
+                                Read
+                            </a>
+                        }
+                    </p>
                 </dd>
                 <dt class = "col-sm-4">
                     @Html.DisplayNameFor(model => element.Raw.RawId)
@@ -123,17 +131,17 @@
                 </dt>
                 <dd class="col-sm-8">
                     <p>
-                        @if (element.Raw.Link != null)
+                        @if (element.Raw == null)
+                        {
+                            <span>
+                                Currently no raw for this novel in our database.
+                            </span>                 
+                        }
+                        else if (element.Raw.Link != null)
                         {
                             <a href="@Html.DisplayFor(modelItem => element.Raw.Link)">
                                 Read
                             </a>
-                        }
-                        else
-                        {
-                            <span>
-                                Currently no raw link for this novel in this database.
-                            </span>
                         }
                     </p>
                 </dd>
@@ -147,7 +155,6 @@
         </div>
         <div>
             <a asp-action="Edit" asp-route-id="@element?.NovelId" class="btn btn-primary">Edit</a>
-            <a asp-action="Index" class="btn btn-primary">Back to List</a>
             <a asp-action="Delete" asp-route-id="@element?.NovelId" class="btn btn-danger">Delete</a>
         </div>
     }

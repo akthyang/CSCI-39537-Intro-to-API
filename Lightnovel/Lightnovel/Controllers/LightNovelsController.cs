@@ -41,6 +41,13 @@ namespace Lightnovel.Controllers
             {
                 response.statusCode = 400;
                 response.statusDescription = "Failed: Id is invalid or the database is empty";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                response.novels.Add(error);
+                return View(response);
             }
 
             var novel = await _context.Novels
@@ -52,6 +59,13 @@ namespace Lightnovel.Controllers
             {
                 response.statusCode = 400;
                 response.statusDescription = "Failed: The novel at id " + id + " does not exist.";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                novel = error;
+                return View(response);
             }
 
             response.novels.Add(novel);
@@ -109,6 +123,13 @@ namespace Lightnovel.Controllers
             {
                 response.statusCode = 400;
                 response.statusDescription = "Failed: Id is empty or database is empty.";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                response.novels.Add(error);
+                return View(response);
             }
 
             var novel = await _context.Novels.FindAsync(id);
@@ -117,7 +138,14 @@ namespace Lightnovel.Controllers
             if (novel == null)
             {
                 response.statusCode = 400;
-                response.statusDescription = "Failed: Novel at id " + id + "does not exist.";
+                response.statusDescription = "Failed: Novel at id " + id + " does not exist.";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                novel = error;
+                return View(response);
             }
             ViewData["Comic"] = new SelectList(_context.Comics, "ComicId", "Title", novel.ComicId);
             ViewData["Creator"] = new SelectList(_context.Creators, "CreatorId", "EnglishName", novel.CreatorId);
@@ -148,6 +176,12 @@ namespace Lightnovel.Controllers
                     {
                         response.statusCode = 400;
                         response.statusDescription = "Failed: The novel you are trying to edit does not exist.";
+                        Novel error = new Novel();
+                        error.Title = "Error";
+                        error.Blurb = "Error";
+                        error.TranslatedStatus = "Error";
+                        error.Rating = 0;
+                        novel = error;
                     }
                     else
                     {
@@ -171,6 +205,13 @@ namespace Lightnovel.Controllers
             {
                 response.statusCode = 400;
                 response.statusDescription = "Failed: Id is empty or the database is empty.";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                response.novels.Add(error);
+                return View(response);
             }
 
             var novel = await _context.Novels
@@ -179,13 +220,20 @@ namespace Lightnovel.Controllers
                 .Include(n => n.Raw)
                 .FirstOrDefaultAsync(m => m.NovelId == id);
 
-            response.novels.Add(novel);
-
             if (novel == null)
             {
                 response.statusCode = 400;
-                response.statusDescription = "Failed: The novel at id " + id + "does not exist";
+                response.statusDescription = "Failed: The novel at id " + id + " does not exist";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                novel = error;
+                return View(response);
             }
+
+            response.novels.Add(novel);
 
             return View(response);
         }
@@ -202,7 +250,13 @@ namespace Lightnovel.Controllers
             if (_context.Novels == null)
             {
                 response.statusCode = 400;
-                response.statusDescription = "Failed: Entity set 'LightNovelDBContext.Novels'  is null.";
+                response.statusDescription = "Failed: The Novels database is null.";
+                Novel error = new Novel();
+                error.Title = "Error";
+                error.Blurb = "Error";
+                error.TranslatedStatus = "Error";
+                error.Rating = 0;
+                response.novels.Add(error);
             }
             var novel = await _context.Novels.FindAsync(id);
             if (novel != null)
