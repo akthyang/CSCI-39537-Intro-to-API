@@ -2,6 +2,8 @@
 
 My final project is to create a Book API holding informations for some light novels. The initial plan of my final project can be found in my [PPT presentation](https://github.com/akthyang/CSCI-39537-Intro-to-API/blob/d270cd0dc63f693939236eb7c942aaff32f26037/Book%20API%20-%20Lightnovels.pdf). The information that was added to my database was found by using [Google](https://www.google.com/) and [NovelUpdates](https://www.novelupdates.com/). Some issues with my BookAPI is that it is completely dependant on the information inputted by the user into the database. There is currently no way for the database to check if the database is the desired info.
 
+Limitations: Some errors will not be displayed on the webpage if we run into an error
+
 ## Database
 
 ### ER Diagram of Initial Plan for API
